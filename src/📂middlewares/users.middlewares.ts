@@ -1,5 +1,6 @@
 import { error } from "console";
 import { Request, Response,NextFunction } from "express";
+import { checkSchema } from "express-validator";
 export const loginValidator=(req:Request,res:Response,next:NextFunction) =>{
   const{email,password}= req.body;
   if(!email || !password) {
@@ -9,3 +10,7 @@ export const loginValidator=(req:Request,res:Response,next:NextFunction) =>{
   }
   next();
 }
+
+export const registerValidator = checkSchema({
+  
+})
