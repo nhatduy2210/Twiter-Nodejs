@@ -1,6 +1,7 @@
 import { error } from 'console'
 import { Request, Response, NextFunction } from 'express'
 import { checkSchema } from 'express-validator'
+import { validate } from '~/utils/validation'
 export const loginValidator = (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body
   if (!email || !password) {
@@ -11,7 +12,7 @@ export const loginValidator = (req: Request, res: Response, next: NextFunction) 
   next()
 }
 
-export const registerValidator = checkSchema({
+export const registerValidator = validate(checkSchema({
   name: {
     notEmpty: true,
     isString: true,
@@ -43,7 +44,8 @@ export const registerValidator = checkSchema({
         minLowercase:1,
         minUppercase:1,
         minSymbols:1
-      }
+      },
+      errorMessage:'Password cần ít nhất 6 kí tự và chứa ít nhất 1 chữ hoa thường 1 kí tự'
     }
   },
   confirm_password:{
@@ -61,6 +63,16 @@ export const registerValidator = checkSchema({
         minLowercase:1,
         minUppercase:1,
         minSymbols:1
+      },
+       
+      errorMessage:'Password cần ít nhất 6 kí tự và chứa ít nhất 1 chữ hoa thường 1 kí tự'
+    },
+    custom:{
+      options:(value,{req})=>{
+if(value != req.body.password){
+  throw new Error('Không trùng khớp')
+}
+return true
       }
     }
   },
@@ -74,4 +86,4 @@ export const registerValidator = checkSchema({
     }
   }
    
-})
+}))
