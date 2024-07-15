@@ -1,5 +1,5 @@
 import { error } from 'console'
-import {ParamsDictionary} from 'express-serve-static-core'
+import { ParamsDictionary } from 'express-serve-static-core'
 import { Request, Response, NextFunction } from 'express'
 import User from '~/models/schemas/User.schema'
 import databaseService from '~/services/database.services'
@@ -19,18 +19,17 @@ export const loginController = (req: Request, res: Response) => {
   })
 }
 
-export const registerController = async (req: Request<ParamsDictionary,
-    any,RegisterReqBody>, res: Response) => {
-  const { email, password } = req.body
-  try {
+export const registerController = async (
+  req: Request<ParamsDictionary, any, RegisterReqBody>,
+   res: Response,
+  next:NextFunction) => {
+ 
+ 
+    throw new Error('error')
     const result = await usersService.register(req.body)
     return res.json({
       message: 'regis sucess',
       result
     })
-  } catch (error) {
-    return res.status(400).json({
-      error: 'regis falied'
-    })
-  }
+ 
 }
