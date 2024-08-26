@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { wrapAsync } from '~/utils/handlers'
+import { wrapRequestHandler } from '~/utils/handlers'
 import { validate } from '~/utils/validation'
 import { loginController, registerController } from '~/📂controllers/users.controllers'
 const usersRouter = Router()
@@ -13,6 +13,6 @@ usersRouter.post('/login', loginValidator, loginController)
 //trả về request handler
 usersRouter.post('/register',
  registerValidator,
- wrapAsync(registerController))
+ wrapRequestHandler(registerController))
 
 export default usersRouter

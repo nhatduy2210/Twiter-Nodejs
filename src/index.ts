@@ -1,4 +1,4 @@
-const express = require('express')
+import express,{Request,Response,NextFunction} from 'express'
 const app = express()
 const port = 3000
 import databaseService from './services/database.services'
@@ -9,9 +9,9 @@ app.use('/users', usersRouter)
 databaseService.connect()
 //khai báo microware
 //mã lỗi sẽ nhảy vào đây
-app.use((error, req, res, next) => {
-  console.log('Lỗi là',error.message)
-  res.status(404).json({
+app.use((error:any, req:Request, res:Response, next:NextFunction) => {
+ 
+  res.status(400).json({
     error: error.message
   })
 })

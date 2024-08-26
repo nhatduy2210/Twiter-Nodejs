@@ -1,5 +1,10 @@
-export const wrapAsync = (func: any) => {
-  return async (req: any, res: any, next: any) => {
+import express,{Request,Response,NextFunction,RequestHandler} from 'express'
+
+
+
+export const wrapRequestHandler = (func: RequestHandler) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+   // Promise.resolve(func(req, res, next)).catch(next)
     try {
       await func(req, res, next)
     } catch (error) {
@@ -10,3 +15,4 @@ export const wrapAsync = (func: any) => {
   }
       
 }
+    

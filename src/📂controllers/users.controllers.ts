@@ -25,11 +25,13 @@ export const registerController = async (
   next:NextFunction) => {
  
  
-    throw new Error('error')
-    const result = await usersService.register(req.body)
-    return res.json({
-      message: 'regis sucess',
-      result
-    })
+ 
+  throw new Error('Lỗi rồii')
+  const result = await usersService.register(req.body)
+  return res.json({
+    message: 'regis sucess',
+    result
+  })
+
  
 }
